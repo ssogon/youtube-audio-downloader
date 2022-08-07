@@ -1,9 +1,11 @@
+import dotenv from 'dotenv';
 import { program } from 'commander';
 import { YoutubeAudioDownloader } from './YoutubeAudioDownloader';
 import { YoutubeMetadata } from './YoutubeMetadata';
 import { YoutubeMetadataParser } from './YoutubeMetadataParser';
 
 (() => {
+  dotenv.config();
   program.argument('<url>').action(process).parse();
 })();
 

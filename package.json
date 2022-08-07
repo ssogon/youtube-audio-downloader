@@ -12,6 +12,7 @@
     "@types/commander": "^2.12.2",
     "@types/puppeteer": "^5.4.6",
     "commander": "^9.4.0",
+    "dotenv": "^16.0.1",
     "puppeteer": "^16.0.0",
     "youtube-dl-exec": "^2.1.4"
   },
