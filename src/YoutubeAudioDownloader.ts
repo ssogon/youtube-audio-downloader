@@ -18,17 +18,16 @@ export class YoutubeAudioDownloader {
         cookies: './cookies.txt',
       }),
       ...(youtubeMetadata && {
-        postprocessorArgs: `-metadata artist=${youtubeMetadata.artist.replace(
-          / /g,
-          '\\ '
-        )} -metadata title=${youtubeMetadata.title.replace(/ /g, '\\ ')}`,
+        postprocessorArgs: `-metadata artist=${escapeYoutubeDlArgument(
+          youtubeMetadata.artist
+        )} -metadata title=${escapeYoutubeDlArgument(youtubeMetadata.title)}`,
       }),
     }).then((output) => console.log(output + '\n'));
   }
 }
 
-function escapeFileName(fileName: string) {
-  return fileName
+const escapeFileName = (fileName: string) =>
+  fileName
     .replace(/\\/g, '＼')
     .replace(/\//g, '／')
     .replace(/\:/g, '：')
@@ -38,4 +37,6 @@ function escapeFileName(fileName: string) {
     .replace(/\</g, '＜')
     .replace(/\>/g, '＞')
     .replace(/\|/g, '｜');
-}
+
+const escapeYoutubeDlArgument = (argument: string) =>
+  argument.replace(/ /g, '\\ ').replace(/'/g, "\\'").replace(/"/g, '\\"');
